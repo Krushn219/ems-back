@@ -15,7 +15,7 @@ const errorMiddleware = require("./middleware/error");
 
 //connecting to mongodb
 let mongoURI = process.env.DATABASEURL;
-//seting up jwt token
+//setting up jwt token
 let jwtKey = process.env.JWTKEY;
 
 app.use(function (req, res, next) {
@@ -46,6 +46,10 @@ app.use(
 );
 app.use(cookieParser());
 app.use(errorMiddleware);
+
+app.use("/", (req, res) => {
+  res.send("Working Aou well!!");
+});
 
 //Log IN
 app.use("/api", require("./routes/Login"));
