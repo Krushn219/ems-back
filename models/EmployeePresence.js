@@ -16,10 +16,10 @@ const employeePresenceSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-employeePresenceSchema.plugin(autoIncrement.plugin, {
-  model: "EmployeePresence",
-  field: "EmployeePresence",
-});
+// employeePresenceSchema.plugin(autoIncrement.plugin, {
+//   model: "EmployeePresence",
+//   field: "EmployeePresence",
+// });
 
 var Employee = mongoose.model("EmployeePresence", employeePresenceSchema);
 module.exports = Employee;

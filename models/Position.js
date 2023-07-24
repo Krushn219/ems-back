@@ -9,10 +9,10 @@ const positionSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-positionSchema.plugin(autoIncrement.plugin, {
-  model: "Position",
-  field: "PositionID",
-});
+// positionSchema.plugin(autoIncrement.plugin, {
+//   model: "Position",
+//   field: "PositionID",
+// });
 
 const PositionValidation = Joi.object().keys({
   PositionName: Joi.string().max(200).required(),

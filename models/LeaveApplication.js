@@ -13,10 +13,10 @@ const leaveApplicationSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-leaveApplicationSchema.plugin(autoIncrement.plugin, {
-  model: "LeaveApplication",
-  field: "LeaveApplicationID",
-});
+// leaveApplicationSchema.plugin(autoIncrement.plugin, {
+//   model: "LeaveApplication",
+//   field: "LeaveApplicationID",
+// });
 
 const LeaveApplicationHRValidation = Joi.object().keys({
   Status: Joi.number().max(3).required(),

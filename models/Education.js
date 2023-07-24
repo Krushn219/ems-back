@@ -11,10 +11,10 @@ const educationSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-educationSchema.plugin(autoIncrement.plugin, {
-  model: "Education",
-  field: "EducationID",
-});
+// educationSchema.plugin(autoIncrement.plugin, {
+//   model: "Education",
+//   field: "EducationID",
+// });
 
 const EducationValidation = Joi.object().keys({
   SchoolUniversity: Joi.string().max(200).required(),

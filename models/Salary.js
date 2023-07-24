@@ -13,10 +13,10 @@ const salarySchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-salarySchema.plugin(autoIncrement.plugin, {
-  model: "Salary",
-  field: "SalaryID",
-});
+// salarySchema.plugin(autoIncrement.plugin, {
+//   model: "Salary",
+//   field: "SalaryID",
+// });
 
 const SalaryValidation = Joi.object().keys({
   BasicSalary: Joi.string().max(20).required(),

@@ -11,10 +11,10 @@ const workExperienceSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-workExperienceSchema.plugin(autoIncrement.plugin, {
-  model: "WorkExperience",
-  field: "WorkExperienceID",
-});
+// workExperienceSchema.plugin(autoIncrement.plugin, {
+//   model: "WorkExperience",
+//   field: "WorkExperienceID",
+// });
 
 const WorkExperienceValidation = Joi.object().keys({
   CompanyName: Joi.string().max(200).required(),

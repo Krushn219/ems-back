@@ -52,10 +52,10 @@ const employeeSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-employeeSchema.plugin(autoIncrement.plugin, {
-  model: "Employee",
-  field: "EmployeeID",
-});
+// employeeSchema.plugin(autoIncrement.plugin, {
+//   model: "Employee",
+//   field: "EmployeeID",
+// });
 
 employeeSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {

@@ -12,6 +12,8 @@ const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const errorMiddleware = require("./middleware/error");
+const Employee = require("./models/Employee");
+const ApiFeatures = require("./utils/apifeatures");
 
 // //connecting to mongodb
 // let mongoURI = process.env.DATABASEURL;
@@ -47,8 +49,20 @@ app.use(
 app.use(cookieParser());
 app.use(errorMiddleware);
 
-app.get("/", (req, res) => {
-  res.send("Working  well!!");
+app.get("/", async (req, res) => {
+  try {
+    const resultPerPage = Number(req.query.limit) || 10;
+
+    const employee = await Employee.find();
+
+    return res.status(200).json({
+      success: true,
+      employee,
+    });
+  } catch (error) {
+    // return next(new ErrorHandler(error.message, 404));
+    console.log("error+++", error);
+  }
 });
 
 //Log IN

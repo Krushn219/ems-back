@@ -9,10 +9,10 @@ const roleSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-roleSchema.plugin(autoIncrement.plugin, {
-  model: "Role",
-  field: "RoleID",
-});
+// roleSchema.plugin(autoIncrement.plugin, {
+//   model: "Role",
+//   field: "RoleID",
+// });
 
 roleSchema.RoleValidation = Joi.object().keys({
   RoleName: Joi.string().max(200).required(),

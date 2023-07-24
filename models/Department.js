@@ -9,10 +9,10 @@ const departmentSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-departmentSchema.plugin(autoIncrement.plugin, {
-  model: "Department",
-  field: "DepartmentID",
-});
+// departmentSchema.plugin(autoIncrement.plugin, {
+//   model: "Department",
+//   field: "DepartmentID",
+// });
 
 const DepartmentValidation = Joi.object().keys({
   DepartmentName: Joi.string().max(200).required(),
