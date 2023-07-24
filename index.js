@@ -15,11 +15,6 @@ const errorMiddleware = require("./middleware/error");
 const Employee = require("./models/Employee");
 const ApiFeatures = require("./utils/apifeatures");
 
-// //connecting to mongodb
-// let mongoURI = process.env.DATABASEURL;
-// //setting up jwt token
-// let jwtKey = process.env.JWTKEY;
-
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
@@ -29,11 +24,6 @@ app.use(function (req, res, next) {
   );
   next();
 });
-
-// Create mongo connection
-// const conn = mongoose.createConnection(mongoURI);
-// autoIncrement.initialize(conn);
-// // app.use(bodyParser.urlencoded({ extended: true }));
 
 //for request body
 app.use(morgan("tiny"));
@@ -51,8 +41,6 @@ app.use(errorMiddleware);
 
 app.get("/", async (req, res) => {
   try {
-    const resultPerPage = Number(req.query.limit) || 10;
-
     const employee = await Employee.find();
 
     return res.status(200).json({
@@ -60,7 +48,6 @@ app.get("/", async (req, res) => {
       employee,
     });
   } catch (error) {
-    // return next(new ErrorHandler(error.message, 404));
     console.log("error+++", error);
   }
 });
