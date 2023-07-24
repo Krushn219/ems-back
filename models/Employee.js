@@ -5,6 +5,8 @@ const crypto = require("crypto");
 const autoIncrement = require("mongoose-auto-increment");
 const Joi = require("joi");
 
+autoIncrement.initialize(mongoose.connection);
+
 const employeeSchema = new mongoose.Schema(
   {
     FirstName: { type: String, trim: true, required: true },

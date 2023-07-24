@@ -48,7 +48,7 @@ app.use(cookieParser());
 app.use(errorMiddleware);
 
 app.get("/", (req, res) => {
-  res.send("Working Aou well!!");
+  res.send("Working  well!!");
 });
 
 //Log IN
