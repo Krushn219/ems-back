@@ -29,9 +29,9 @@ app.use(function (req, res, next) {
 });
 
 // Create mongo connection
-const conn = mongoose.createConnection(mongoURI);
-autoIncrement.initialize(conn);
-// app.use(bodyParser.urlencoded({ extended: true }));
+// const conn = mongoose.createConnection(mongoURI);
+// autoIncrement.initialize(conn);
+// // app.use(bodyParser.urlencoded({ extended: true }));
 
 //for request body
 app.use(morgan("tiny"));
@@ -48,9 +48,6 @@ app.use(cookieParser());
 app.use(errorMiddleware);
 
 app.get("/", (req, res) => {
-  res.send("Working Aou well!!");
-});
-app.get("/test", (req, res) => {
   res.send("Working Aou well!!");
 });
 

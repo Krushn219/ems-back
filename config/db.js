@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
 
+var DATABASEURL =
+  "mongodb+srv://admin:admin@cluster0.gxtdmwa.mongodb.net/EMS-1";
+var JWTKEY = "This is jwt Secter Key";
+
 //connecting to mongodb
-mongoose.connect(process.env.DATABASEURL);
+// mongoose.connect(process.env.DATABASEURL);
+mongoose.connect(DATABASEURL);
 
 const db = mongoose.connection;
 
