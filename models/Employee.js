@@ -4,8 +4,6 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const Joi = require("joi");
 
-autoIncrement.initialize(mongoose.connection);
-
 const employeeSchema = new mongoose.Schema(
   {
     FirstName: { type: String, trim: true, required: true },
