@@ -47,7 +47,7 @@ app.use(
 app.use(cookieParser());
 app.use(errorMiddleware);
 
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Working Aou well!!");
 });
 
