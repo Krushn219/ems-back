@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
-const autoIncrement = require("mongoose-auto-increment");
 const Joi = require("joi");
 
 autoIncrement.initialize(mongoose.connection);
@@ -52,7 +51,7 @@ const employeeSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-// employeeSchema.plugin(autoIncrement.plugin, {
+
 //   model: "Employee",
 //   field: "EmployeeID",
 // });

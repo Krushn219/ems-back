@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const autoIncrement = require("mongoose-auto-increment");
 const Joi = require("joi");
 
 const workExperienceSchema = new mongoose.Schema(
@@ -11,10 +10,6 @@ const workExperienceSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-// workExperienceSchema.plugin(autoIncrement.plugin, {
-//   model: "WorkExperience",
-//   field: "WorkExperienceID",
-// });
 
 const WorkExperienceValidation = Joi.object().keys({
   CompanyName: Joi.string().max(200).required(),

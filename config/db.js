@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
-const autoIncrement = require("mongoose-auto-increment");
 
 // Use native ES6 promises (preferred)
 mongoose.Promise = global.Promise;
@@ -13,7 +12,6 @@ mongoose.connect(process.env.DATABASEURL, {
 });
 
 const db = mongoose.connection;
-autoIncrement.initialize(db);
 
 db.on("error", console.error.bind(console, "Connection Error..!!"));
 

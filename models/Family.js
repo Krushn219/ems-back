@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const autoIncrement = require("mongoose-auto-increment");
 const Joi = require("joi");
 
 const familyInfoSchema = new mongoose.Schema(
@@ -11,10 +10,6 @@ const familyInfoSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-// familyInfoSchema.plugin(autoIncrement.plugin, {
-//   model: "FamilyInfo",
-//   field: "FamilyInfoID",
-// });
 
 const FamilyInfoValidation = Joi.object().keys({
   Name: Joi.string().max(200).required(),

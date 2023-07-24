@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const autoIncrement = require("mongoose-auto-increment");
 const Joi = require("joi");
 
 const leaveApplicationSchema = new mongoose.Schema(
@@ -13,10 +12,6 @@ const leaveApplicationSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-// leaveApplicationSchema.plugin(autoIncrement.plugin, {
-//   model: "LeaveApplication",
-//   field: "LeaveApplicationID",
-// });
 
 const LeaveApplicationHRValidation = Joi.object().keys({
   Status: Joi.number().max(3).required(),

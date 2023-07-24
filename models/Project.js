@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const autoIncrement = require("mongoose-auto-increment");
 const Joi = require("joi");
 
 const projectSchema = new mongoose.Schema(
@@ -26,10 +25,6 @@ const projectSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-// projectSchema.plugin(autoIncrement.plugin, {
-//   model: "Project",
-//   field: "ID",
-// });
 
 const ProjectValidation = Joi.object().keys({
   _id: Joi.optional(),

@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const autoIncrement = require("mongoose-auto-increment");
 const Joi = require("joi");
 
 const roleSchema = new mongoose.Schema(
@@ -9,10 +8,6 @@ const roleSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-// roleSchema.plugin(autoIncrement.plugin, {
-//   model: "Role",
-//   field: "RoleID",
-// });
 
 roleSchema.RoleValidation = Joi.object().keys({
   RoleName: Joi.string().max(200).required(),

@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
-const autoIncrement = require("mongoose-auto-increment");
 const Joi = require("joi");
 
 const employeePresenceSchema = new mongoose.Schema(
@@ -16,10 +15,6 @@ const employeePresenceSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-// employeePresenceSchema.plugin(autoIncrement.plugin, {
-//   model: "EmployeePresence",
-//   field: "EmployeePresence",
-// });
 
 var Employee = mongoose.model("EmployeePresence", employeePresenceSchema);
 module.exports = Employee;

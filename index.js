@@ -1,6 +1,5 @@
 var express = require("express"),
   mongoose = require("mongoose"),
-  autoIncrement = require("mongoose-auto-increment"),
   Joi = require("joi"),
   jwt = require("jsonwebtoken");
 require("dotenv").config();

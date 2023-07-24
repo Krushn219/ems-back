@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const autoIncrement = require("mongoose-auto-increment");
 const Joi = require("joi");
 
 const positionSchema = new mongoose.Schema(
@@ -9,7 +8,7 @@ const positionSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-// positionSchema.plugin(autoIncrement.plugin, {
+
 //   model: "Position",
 //   field: "PositionID",
 // });
