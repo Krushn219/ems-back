@@ -3,8 +3,10 @@ const dotenv = require("dotenv");
 dotenv.config();
 const autoIncrement = require("mongoose-auto-increment");
 
-//connecting to mongodb
+// Use native ES6 promises (preferred)
+mongoose.Promise = global.Promise;
 
+//connecting to mongodb
 mongoose.connect(process.env.DATABASEURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
