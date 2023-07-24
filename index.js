@@ -13,10 +13,10 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const errorMiddleware = require("./middleware/error");
 
-//connecting to mongodb
-let mongoURI = process.env.DATABASEURL;
-//setting up jwt token
-let jwtKey = process.env.JWTKEY;
+// //connecting to mongodb
+// let mongoURI = process.env.DATABASEURL;
+// //setting up jwt token
+// let jwtKey = process.env.JWTKEY;
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
