@@ -50,6 +50,9 @@ app.use(errorMiddleware);
 app.get("/", (req, res) => {
   res.send("Working Aou well!!");
 });
+app.get("/test", (req, res) => {
+  res.send("Working Aou well!!");
+});
 
 //Log IN
 app.use("/api", require("./routes/Login"));
