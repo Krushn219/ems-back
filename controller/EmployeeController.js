@@ -2,6 +2,7 @@ const Employee = require("../models/Employee");
 const ErrorHandler = require("../utils/errorhandler");
 const ApiFeatures = require("../utils/apifeatures");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const EmployeePresence = require("../models/EmployeePresence");
 
 module.exports.createEmployee = catchAsyncErrors(async (req, res, next) => {
   try {
@@ -31,6 +32,12 @@ module.exports.createEmployee = catchAsyncErrors(async (req, res, next) => {
 });
 
 module.exports.getAllEmployee = catchAsyncErrors(async (req, res, next) => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+
+  const formattedToday = `${year}-${month}-${day}`;
   try {
     const resultPerPage = Number(req.query.limit);
 

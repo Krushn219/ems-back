@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Joi = require("joi");
 
 const salarySchema = new mongoose.Schema(
   {
@@ -9,18 +8,10 @@ const salarySchema = new mongoose.Schema(
     AccountHolderName: { type: String, required: true, trim: true },
     IFSCcode: { type: String, required: true, trim: true },
     TaxDeduction: { type: String, required: true },
+    Employee: { type: mongoose.Schema.Types.ObjectId, ref: "Employee" },
   },
   { timestamps: true }
 );
-
-const SalaryValidation = Joi.object().keys({
-  BasicSalary: Joi.string().max(20).required(),
-  BankName: Joi.string().max(200).required(),
-  AccountNo: Joi.string().max(200).required(),
-  AccountHolderName: Joi.string().max(200).required(),
-  IFSCcode: Joi.string().max(200).required(),
-  TaxDeduction: Joi.string().max(100).required(),
-});
 
 const Salary = mongoose.model("Salary", salarySchema);
 module.exports = Salary;

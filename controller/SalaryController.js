@@ -34,7 +34,12 @@ module.exports.getAllSalary = catchAsyncErrors(async (req, res, next) => {
       sort[req.query.sortBy] = req.query.groupBy === "desc" ? -1 : 1;
     }
 
-    const apiFeature = new ApiFeatures(Salary.find().sort(sort), req.query)
+    const apiFeature = new ApiFeatures(
+      Salary.find()
+        .populate("Employee", "FirstName MiddleName LastName")
+        .sort(sort),
+      req.query
+    )
       .filter()
       .search()
       .pagination(resultPerPage);

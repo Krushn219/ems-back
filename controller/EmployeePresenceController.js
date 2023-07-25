@@ -3,6 +3,7 @@ const ErrorHandler = require("../utils/errorhandler");
 const ApiFeatures = require("../utils/apifeatures");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 var moment = require("moment-timezone");
+const Employee = require("../models/Employee");
 
 module.exports.createEmployeePresence = catchAsyncErrors(
   async (req, res, next) => {
@@ -12,14 +13,33 @@ module.exports.createEmployeePresence = catchAsyncErrors(
 
     // https://www.mongodb.com/community/forums/t/save-date-of-birth-of-user-without-timezone/9155
 
-    const date = req.body.date + "Z";
+    // const date = req.body.date + "Z";
+    // const date = req.body.date;
 
     try {
+      const isExisted = await EmployeePresence.findOne({
+        EmployeeID: req.body.EmployeeID,
+        presence: {
+          date: req.body.date,
+          present: req.body.present,
+        },
+      });
+
+      console.log("isExisted+++", isExisted);
+      if (isExisted) {
+        return res.status(404).json({
+          success: false,
+          msg: "Already Create EmployeePresence..",
+        });
+      }
       const employeePresence = await EmployeePresence.create({
         EmployeeName: req.body.EmployeeName,
         EmployeeID: req.body.EmployeeID,
-        "presence.date": date,
-        "presence.present": req.body.present,
+        presence: {
+          date: req.body.date,
+          present: req.body.present,
+        },
+        workingHours: req.body.workingHours,
       });
 
       if (!employeePresence) {
@@ -38,6 +58,50 @@ module.exports.createEmployeePresence = catchAsyncErrors(
     }
   }
 );
+
+// module.exports.createEmployeePresence = catchAsyncErrors(
+//   async (req, res, next) => {
+//     const selectedDate = req.body.date + "T00:00:00.000Z";
+
+//     try {
+//       const employees = await Employee.find();
+//       console.log("selectedDate+++", selectedDate + "T00:00:00.000Z");
+
+//       for (const employee of employees) {
+//         // Check if presence data for the employee and selected date already exists
+//         const existingPresenceData = await EmployeePresence.findOne({
+//           EmployeeID: employee._id,
+//           "presence.date": selectedDate,
+//         });
+//         console.log("existingPresenceData+++", existingPresenceData);
+
+//         if (!existingPresenceData) {
+//           // Presence data does not exist, create new entry
+//           const presenceData = {
+//             EmployeeName: employee.FirstName,
+//             EmployeeID: employee._id,
+//             date: selectedDate,
+//             present: true,
+//           };
+
+//           await EmployeePresence.create(presenceData);
+//         } else {
+//           // Presence data already exists, you can choose to update it if needed
+//           // For example, if you want to update the "present" field, you can do:
+//           existingPresenceData.present = true;
+//           await existingPresenceData.save();
+//         }
+//       }
+
+//       return res.status(201).json({
+//         success: true,
+//         msg: `Present data created for all employees on ${selectedDate}.`,
+//       });
+//     } catch (error) {
+//       return next(new ErrorHandler(error.message, 404));
+//     }
+//   }
+// );
 
 module.exports.getAllEmployeePresence = catchAsyncErrors(
   async (req, res, next) => {
