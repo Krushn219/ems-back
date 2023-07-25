@@ -4,31 +4,35 @@ const jwt = require("jsonwebtoken");
 let jwtKey = process.env.JWTKEY;
 
 module.exports.LogIn = catchAsyncErrors(async (req, res, next) => {
-
+  const data = await Employee.findOne({ Email: req.body.email });
+  // console.log("data++++", data);
   try {
-    await Employee.findOne(
+    const employee = await Employee.findOne(
       { Email: req.body.email },
-      "Password _id Account FirstName LastName",
-      function (err, document) {
-        if (err || document == null) {
-          res.send("false");
-        } else {
-          if (document.Password == req.body.password) {
-            emp = {
-              _id: document._id,
-              Account: document.Account,
-              FirstName: document.FirstName,
-              LastName: document.LastName,
-            };
-            var token = jwt.sign(emp, jwtKey);
-            res.send(token);
-          } else {
-            res.sendStatus(400);
-          }
-        }
-      }
+      "Password _id Account FirstName LastName"
     );
-  } catch (error) {}
+    if (!employee) {
+      return res.status(400).json({
+        success: false,
+      });
+    } else {
+      if (employee.Password == req.body.password) {
+        emp = {
+          _id: employee._id,
+          Account: employee.Account,
+          FirstName: employee.FirstName,
+          LastName: employee.LastName,
+        };
+        var token = jwt.sign(emp, jwtKey);
+
+        res.send(token);
+      } else {
+        res.sendStatus(400);
+      }
+    }
+  } catch (error) {
+    console.log("Error+++", error);
+  }
 });
 // module.exports.LogIn = catchAsyncErrors(async (req, res, next) => {
 //   var arr = [
