@@ -5,10 +5,9 @@ const employeePresenceSchema = new mongoose.Schema(
   {
     EmployeeName: String,
     EmployeeID: { type: mongoose.Schema.Types.ObjectId, ref: "Employee" },
-    presence: {
-      date: String,
-      present: { type: Boolean, default: 0 },
-    },
+    date: String,
+    present: { type: Boolean, default: 0 },
+    workHours: { type: String, default: 0 },
   },
   { timestamps: true }
 );

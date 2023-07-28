@@ -19,10 +19,8 @@ module.exports.createEmployeePresence = catchAsyncErrors(
     try {
       const isExisted = await EmployeePresence.findOne({
         EmployeeID: req.body.EmployeeID,
-        presence: {
-          date: req.body.date,
-          present: req.body.present,
-        },
+        date: req.body.date,
+        present: req.body.present,
       });
 
       console.log("isExisted+++", isExisted);
@@ -35,11 +33,9 @@ module.exports.createEmployeePresence = catchAsyncErrors(
       const employeePresence = await EmployeePresence.create({
         EmployeeName: req.body.EmployeeName,
         EmployeeID: req.body.EmployeeID,
-        presence: {
-          date: req.body.date,
-          present: req.body.present,
-        },
-        workingHours: req.body.workingHours,
+        date: req.body.date,
+        present: req.body.present,
+        workHours: req.body.workingHours,
       });
 
       if (!employeePresence) {
@@ -105,6 +101,43 @@ module.exports.createEmployeePresence = catchAsyncErrors(
 
 module.exports.getAllEmployeePresence = catchAsyncErrors(
   async (req, res, next) => {
+    try {
+      const resultPerPage = Number(req.query.limit);
+
+      let totalEmployeePresence = await EmployeePresence.countDocuments();
+      const sort = {};
+
+      if (req.query.sortBy && req.query.groupBy) {
+        sort[req.query.sortBy] = req.query.groupBy === "desc" ? -1 : 1;
+      }
+
+      const apiFeature = new ApiFeatures(
+        EmployeePresence.find().sort(sort),
+        req.query
+      )
+        .filter()
+        .search()
+        .pagination(resultPerPage);
+      let employeePresence = await apiFeature.query;
+      let filteredEmployeePresenceCount = employeePresence.length;
+
+      return res.status(200).json({
+        success: true,
+        totalEmployeePresence: totalEmployeePresence,
+        filteredEmployeePresence: filteredEmployeePresenceCount,
+        page: req.query.page,
+        limit: resultPerPage,
+        employeePresence,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 404));
+    }
+  }
+);
+
+module.exports.getAllEmployeePresenceByDate = catchAsyncErrors(
+  async (req, res, next) => {
+    console.log("req.body+++", req.body);
     try {
       const resultPerPage = Number(req.query.limit);
 
